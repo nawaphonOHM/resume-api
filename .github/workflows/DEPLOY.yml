@@ -1,0 +1,32 @@
+name: DEPLOY.yml
+on:
+  push:
+    tags:
+      - 'v\d+\.\d+\.\d+'
+permissions:
+  id-token: write # Required for requesting the JWT/OIDC token
+  contents: read  # Required for actions/checkout
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Initialize
+        uses: ./.github/actions/initialize
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_FEDERATION_PRINCIPAL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Submit Cloud Build
+        run: |
+          gcloud builds submit --substitutions=TAG_NAME=${GITHUB_REF_NAME}
