@@ -1,0 +1,46 @@
+name: DEPLOY.yml
+on:
+  push:
+    tags:
+      - 'v\d+\.\d+\.\d+'
+permissions:
+  id-token: write # Required for requesting the JWT/OIDC token
+  contents: read  # Required for actions/checkout
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Code
+        uses: actions/checkout@v7
+
+      - name: Setup go and dependencies
+        uses: actions/setup-go@v7
+        with:
+          go-version: 'stable'
+          check-latest: true
+          cache: true
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_FEDERATION_PROVIDER }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Set Short SHA
+        id: SHORT_SHA
+        run: |
+          echo "SHORT_SHA=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+
+      - name: Submit Cloud Build
+        run: |
+          gcloud builds submit \
+          --region=${{ vars.LOCATION }} \
+          --substitutions=_IMAGE_NAME=resume-api,_REPO_NAME=resume-api-images,_SERVICE_NAME=resume-api-service,_BUILDER=${{ vars.BUILDER }},_LOCATION=${{ vars.LOCATION }},_SHORT_SHA=${{ env.SHORT_SHA }},_SERVICE_ACCOUNT=${{ secrets.SERVICE_ACCOUNT }}
