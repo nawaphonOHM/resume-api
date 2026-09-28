@@ -1,0 +1,18 @@
+name: initialize
+author: nawaphon
+description: initialize
+
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Pull Code
+      uses: actions/checkout@v7
+
+    - name: Setup go and dependencies
+      uses: actions/setup-go@v7
+      with:
+        go-version: 'stable'
+        check-latest: true
+        cache: true
