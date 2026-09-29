@@ -2,7 +2,7 @@ module github.com/nawaphonOHM/resume-api
 
 go 1.27.1
 
-require github.com/nawaphonOHM/whatever v1.0.0
+require github.com/nawaphonOHM/whatever v1.1.0
 
 require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
