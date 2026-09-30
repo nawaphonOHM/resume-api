@@ -13,14 +13,14 @@ var ErrNotFound = errors.New("resource not found")
 type Repository interface {
 	// GetLatestDetails retrieves the latest details document.
 	GetLatestDetails(context.Context) (*Details, error)
-	// GetLatestEducation retrieves the latest education document.
-	GetLatestEducation(context.Context) (*Education, error)
-	// GetLatestExperience retrieves the latest experience document.
-	GetLatestExperience(context.Context) ([]*ExperienceItem, error)
+	// GetLatestEducations retrieves the latest education document.
+	GetLatestEducations(context.Context) (*Education, error)
+	// GetLatestExperiences retrieves the latest experience document.
+	GetLatestExperiences(context.Context) ([]*ExperienceItem, error)
 	// GetLatestLinks retrieves the latest links document.
 	GetLatestLinks(context.Context) ([]*LinkItem, error)
-	// GetLatestName retrieves the latest name document.
-	GetLatestName(context.Context) (string, error)
+	// GetLatestNames retrieves the latest name document.
+	GetLatestNames(context.Context) (string, error)
 	// GetLatestTitles retrieves the latest titles document.
 	GetLatestTitles(context.Context) ([]string, error)
 }
