@@ -9,14 +9,14 @@ import (
 type Service interface {
 	// GetDetails retrieves the latest personal details.
 	GetDetails(context.Context) (*Details, error)
-	// GetEducation retrieves the latest education background.
-	GetEducation(context.Context) (*Education, error)
-	// GetExperience retrieves the latest work experiences.
-	GetExperience(context.Context) ([]*ExperienceItem, error)
+	// GetEducations retrieves the latest education background.
+	GetEducations(context.Context) (*Education, error)
+	// GetExperiences retrieves the latest work experiences.
+	GetExperiences(context.Context) ([]*ExperienceItem, error)
 	// GetLinks retrieves the latest external links.
 	GetLinks(context.Context) ([]*LinkItem, error)
-	// GetName retrieves the latest display name.
-	GetName(context.Context) (string, error)
+	// GetNames retrieves the latest display name.
+	GetNames(context.Context) (string, error)
 	// GetTitles retrieves the latest list of titles.
 	GetTitles(context.Context) ([]string, error)
 }
@@ -34,20 +34,20 @@ func (s *resumeService) GetDetails(ctx context.Context) (*Details, error) {
 	return s.repo.GetLatestDetails(ctx)
 }
 
-func (s *resumeService) GetEducation(ctx context.Context) (*Education, error) {
-	return s.repo.GetLatestEducation(ctx)
+func (s *resumeService) GetEducations(ctx context.Context) (*Education, error) {
+	return s.repo.GetLatestEducations(ctx)
 }
 
-func (s *resumeService) GetExperience(ctx context.Context) ([]*ExperienceItem, error) {
-	return s.repo.GetLatestExperience(ctx)
+func (s *resumeService) GetExperiences(ctx context.Context) ([]*ExperienceItem, error) {
+	return s.repo.GetLatestExperiences(ctx)
 }
 
 func (s *resumeService) GetLinks(ctx context.Context) ([]*LinkItem, error) {
 	return s.repo.GetLatestLinks(ctx)
 }
 
-func (s *resumeService) GetName(ctx context.Context) (string, error) {
-	return s.repo.GetLatestName(ctx)
+func (s *resumeService) GetNames(ctx context.Context) (string, error) {
+	return s.repo.GetLatestNames(ctx)
 }
 
 func (s *resumeService) GetTitles(ctx context.Context) ([]string, error) {

@@ -18,20 +18,20 @@ func TestHandler_GetDetails(t *testing.T) {
 	assertStatus(t, h.GetDetails(nil), http.StatusNotFound)
 }
 
-func TestHandler_GetEducation(t *testing.T) {
+func TestHandler_GetEducations(t *testing.T) {
 	repo := &MemoryRepository{Education: &Education{Degree: "B.Sc."}}
 	h := NewHandler(NewService(repo))
-	assertStatus(t, h.GetEducation(nil), http.StatusOK)
+	assertStatus(t, h.GetEducations(nil), http.StatusOK)
 	repo.Education = nil
-	assertStatus(t, h.GetEducation(nil), http.StatusNotFound)
+	assertStatus(t, h.GetEducations(nil), http.StatusNotFound)
 }
 
-func TestHandler_GetExperience(t *testing.T) {
+func TestHandler_GetExperiences(t *testing.T) {
 	repo := &MemoryRepository{Experience: []*ExperienceItem{{Company: "Corp"}}}
 	h := NewHandler(NewService(repo))
-	assertStatus(t, h.GetExperience(nil), http.StatusOK)
+	assertStatus(t, h.GetExperiences(nil), http.StatusOK)
 	repo.Experience = nil
-	assertStatus(t, h.GetExperience(nil), http.StatusNotFound)
+	assertStatus(t, h.GetExperiences(nil), http.StatusNotFound)
 }
 
 func verifyRouteMethod(t *testing.T, api *rest.ExportableAPI) {

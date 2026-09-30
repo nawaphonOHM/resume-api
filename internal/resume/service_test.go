@@ -55,32 +55,32 @@ func TestService_GetDetails(t *testing.T) {
 	assertNotFound(t, err)
 }
 
-func TestService_GetEducation(t *testing.T) {
+func TestService_GetEducations(t *testing.T) {
 	repo := &MemoryRepository{Education: &Education{
 		SeniorProject:   &SeniorProject{Name: "Proj"},
 		InstitutionLogo: &Logo{Src: "logo.png"},
 		Degree:          "B.Sc.",
 	}}
 	svc := NewService(repo)
-	res, err := svc.GetEducation(context.Background())
+	res, err := svc.GetEducations(context.Background())
 	assertNoError(t, err)
 	assertEducation(t, res)
 	repo.Education = nil
-	_, err = svc.GetEducation(context.Background())
+	_, err = svc.GetEducations(context.Background())
 	assertNotFound(t, err)
 }
 
-func TestService_GetExperience(t *testing.T) {
+func TestService_GetExperiences(t *testing.T) {
 	repo := &MemoryRepository{Experience: []*ExperienceItem{{
 		CompanyLogo: &Logo{Src: "corp.png"},
 		Client:      &ClientItem{Logo: &Logo{Src: "client.png"}, Name: "Client"},
 		Company:     "Corp",
 	}}}
 	svc := NewService(repo)
-	res, err := svc.GetExperience(context.Background())
+	res, err := svc.GetExperiences(context.Background())
 	assertNoError(t, err)
 	assertExperience(t, res)
 	repo.Experience = nil
-	_, err = svc.GetExperience(context.Background())
+	_, err = svc.GetExperiences(context.Background())
 	assertNotFound(t, err)
 }
