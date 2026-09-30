@@ -34,18 +34,18 @@ func (h *Handler) GetDetails(rest.Context) rest.Response {
 	return rest.OK(data)
 }
 
-// GetEducation handles GET /v1/education.
-func (h *Handler) GetEducation(rest.Context) rest.Response {
-	data, err := h.service.GetEducation(context.Background())
+// GetEducations handles GET /v1/educations.
+func (h *Handler) GetEducations(rest.Context) rest.Response {
+	data, err := h.service.GetEducations(context.Background())
 	if err != nil {
 		return mapError(err)
 	}
 	return rest.OK(data)
 }
 
-// GetExperience handles GET /v1/experience.
-func (h *Handler) GetExperience(rest.Context) rest.Response {
-	data, err := h.service.GetExperience(context.Background())
+// GetExperiences handles GET /v1/experiences.
+func (h *Handler) GetExperiences(rest.Context) rest.Response {
+	data, err := h.service.GetExperiences(context.Background())
 	if err != nil {
 		return mapError(err)
 	}
@@ -63,7 +63,7 @@ func (h *Handler) GetLinks(rest.Context) rest.Response {
 
 // GetNames handles GET /v1/names.
 func (h *Handler) GetNames(rest.Context) rest.Response {
-	data, err := h.service.GetName(context.Background())
+	data, err := h.service.GetNames(context.Background())
 	if err != nil {
 		return mapError(err)
 	}

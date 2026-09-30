@@ -22,13 +22,13 @@ func (r *MongoRepository) GetLatestDetails(ctx context.Context) (*Details, error
 	return queryLatest[Details](ctx, r.client, "details")
 }
 
-// GetLatestEducation retrieves the latest education document.
-func (r *MongoRepository) GetLatestEducation(ctx context.Context) (*Education, error) {
+// GetLatestEducations retrieves the latest education document.
+func (r *MongoRepository) GetLatestEducations(ctx context.Context) (*Education, error) {
 	return queryLatest[Education](ctx, r.client, "education")
 }
 
-// GetLatestExperience retrieves the latest experience document.
-func (r *MongoRepository) GetLatestExperience(ctx context.Context) ([]*ExperienceItem, error) {
+// GetLatestExperiences retrieves the latest experience document.
+func (r *MongoRepository) GetLatestExperiences(ctx context.Context) ([]*ExperienceItem, error) {
 	res, err := queryLatest[[]*ExperienceItem](ctx, r.client, "experience")
 	if err != nil {
 		return nil, err
@@ -45,8 +45,8 @@ func (r *MongoRepository) GetLatestLinks(ctx context.Context) ([]*LinkItem, erro
 	return *res, nil
 }
 
-// GetLatestName retrieves the latest name document.
-func (r *MongoRepository) GetLatestName(ctx context.Context) (string, error) {
+// GetLatestNames retrieves the latest name document.
+func (r *MongoRepository) GetLatestNames(ctx context.Context) (string, error) {
 	res, err := queryLatest[string](ctx, r.client, "name")
 	if err != nil {
 		return "", err

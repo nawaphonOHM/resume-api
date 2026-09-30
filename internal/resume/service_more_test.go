@@ -25,13 +25,13 @@ func TestService_GetLinks(t *testing.T) {
 func TestService_GetName(t *testing.T) {
 	repo := &MemoryRepository{Name: "John Doe"}
 	svc := NewService(repo)
-	res, err := svc.GetName(context.Background())
+	res, err := svc.GetNames(context.Background())
 	assertNoError(t, err)
 	if res != "John Doe" {
 		t.Fatalf("unexpected name: %s", res)
 	}
 	repo.Name = ""
-	_, err = svc.GetName(context.Background())
+	_, err = svc.GetNames(context.Background())
 	assertNotFound(t, err)
 }
 
