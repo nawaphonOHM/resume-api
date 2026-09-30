@@ -39,8 +39,8 @@ func (m *MemoryRepository) GetLatestDetails(ctx context.Context) (*Details, erro
 	return m.Details, nil
 }
 
-// GetLatestEducation returns the in-memory education or ErrNotFound.
-func (m *MemoryRepository) GetLatestEducation(ctx context.Context) (*Education, error) {
+// GetLatestEducations returns the in-memory education or ErrNotFound.
+func (m *MemoryRepository) GetLatestEducations(ctx context.Context) (*Education, error) {
 	if err := m.checkErr(ctx); err != nil {
 		return nil, err
 	}
@@ -50,8 +50,8 @@ func (m *MemoryRepository) GetLatestEducation(ctx context.Context) (*Education, 
 	return m.Education, nil
 }
 
-// GetLatestExperience returns the in-memory experience or ErrNotFound.
-func (m *MemoryRepository) GetLatestExperience(ctx context.Context) ([]*ExperienceItem, error) {
+// GetLatestExperiences returns the in-memory experience or ErrNotFound.
+func (m *MemoryRepository) GetLatestExperiences(ctx context.Context) ([]*ExperienceItem, error) {
 	if err := m.checkErr(ctx); err != nil {
 		return nil, err
 	}
@@ -72,8 +72,8 @@ func (m *MemoryRepository) GetLatestLinks(ctx context.Context) ([]*LinkItem, err
 	return m.Links, nil
 }
 
-// GetLatestName returns the in-memory name or ErrNotFound.
-func (m *MemoryRepository) GetLatestName(ctx context.Context) (string, error) {
+// GetLatestNames returns the in-memory name or ErrNotFound.
+func (m *MemoryRepository) GetLatestNames(ctx context.Context) (string, error) {
 	if err := m.checkErr(ctx); err != nil {
 		return "", err
 	}
