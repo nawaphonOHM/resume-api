@@ -20,6 +20,7 @@ steps:
       - '--region=$_LOCATION'
       - '--platform=managed'
       - '--no-allow-unauthenticated'
+      - '--service-account=$_SERVICE_ACCOUNT_EMAIL_ONLY'
       - '--ingress=internal-and-cloud-load-balancing'
       - '--set-secrets=OHM9996_MONGODB_AUTH_SOURCE=OHM9996_MONGODB_AUTH_SOURCE:1'
       - '--set-secrets=OHM9996_MONGODB_DATABASE=OHM9996_MONGODB_DATABASE:1'
@@ -40,7 +41,7 @@ images:
   - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_SHORT_SHA'
 
 # Specify your custom service account
-serviceAccount: '$_SERVICE_ACCOUNT'
+serviceAccount: '$_SERVICE_ACCOUNT_URL_PATH'
 
 options:
   logging: CLOUD_LOGGING_ONLY
