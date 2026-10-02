@@ -22,6 +22,7 @@ steps:
       - '--no-allow-unauthenticated'
       - '--service-account=$_SERVICE_ACCOUNT_EMAIL_ONLY'
       - '--ingress=internal-and-cloud-load-balancing'
+      - '--startup-probe=httpGet.port=8080,httpGet.path=/health,timeoutSeconds=240,periodSeconds=240,failureThreshold=1'
       - '--set-secrets=OHM9996_MONGODB_AUTH_SOURCE=OHM9996_MONGODB_AUTH_SOURCE:1'
       - '--set-secrets=OHM9996_MONGODB_DATABASE=OHM9996_MONGODB_DATABASE:1'
       - '--set-secrets=OHM9996_MONGODB_HOST=OHM9996_MONGODB_HOST:1'
