@@ -38,7 +38,7 @@ steps:
 # Specify which images to track in the build history
 images:
   - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_SHORT_SHA'
-  -
+
 # Specify your custom service account
 serviceAccount: '$_SERVICE_ACCOUNT'
 
