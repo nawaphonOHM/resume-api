@@ -21,6 +21,7 @@ func run() error {
 	service := resume.NewService(repo)
 	handler := resume.NewHandler(service)
 	bp := rest.NewBluePrint().AddAPIs(resume.Routes(handler))
+	bp.Meta().Cors().WithAllowOrigin("resume.ohm-mho.space").WithAllowHTTPMethods(rest.GET)
 	return rest.StartREST(bp)
 }
 
