@@ -43,4 +43,4 @@ jobs:
         run: |
           gcloud builds submit \
           --region=${{ vars.LOCATION }} \
-          --substitutions=_IMAGE_NAME=resume-api,_REPO_NAME=resume-api-images,_SERVICE_NAME=resume-api-service,_BUILDER=${{ vars.BUILDER }},_LOCATION=${{ vars.LOCATION }},_SHORT_SHA=${{ env.SHORT_SHA }},_SERVICE_ACCOUNT=${{ secrets.SERVICE_ACCOUNT_AT_CLOUD_BUILD }}
+          --substitutions=_IMAGE_NAME=resume-api,_REPO_NAME=resume-api-images,_SERVICE_NAME=resume-api-service,_BUILDER=${{ vars.BUILDER }},_LOCATION=${{ vars.LOCATION }},_SHORT_SHA=${{ env.SHORT_SHA }},_SERVICE_ACCOUNT_EMAIL_ONLY=${{ secrets.SERVICE_ACCOUNT_EMAIL_ONLY }},_SERVICE_ACCOUNT_URL_PATH=${{ secrets.SERVICE_ACCOUNT_URL_PATH }}
