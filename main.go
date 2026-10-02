@@ -11,18 +11,30 @@ import (
 	"github.com/nawaphonOHM/whatever/pkg/rest"
 )
 
-func run() error {
-	ctx := context.Background()
-	client, err := mongodb.Connect(ctx)
-	if err != nil {
-		return err
-	}
+const allowedOrigin = "resume.ohm-mho.space"
+
+func buildCorsSetting() *rest.CorsSetting {
+	return rest.NewCorsSetting().WithAllowHTTPMethods(rest.GET).WithAllowOrigin(allowedOrigin)
+}
+
+func buildBlueprint(routes *rest.RRestAPIRegistration) *rest.BluePrint {
+	meta := rest.NewMeta().WithCors(buildCorsSetting())
+	return rest.NewBluePrint().WithAPIs(routes).WithMeta(meta)
+}
+
+func initRoutes(client *mongodb.Client) *rest.RRestAPIRegistration {
 	repo := resume.NewMongoRepository(client)
 	service := resume.NewService(repo)
 	handler := resume.NewHandler(service)
-	bp := rest.NewBluePrint().AddAPIs(resume.Routes(handler))
-	bp.Meta().Cors().WithAllowOrigin("resume.ohm-mho.space").WithAllowHTTPMethods(rest.GET)
-	return rest.StartREST(bp)
+	return resume.Routes(handler)
+}
+
+func run() error {
+	client, err := mongodb.Connect(context.Background())
+	if err != nil {
+		return err
+	}
+	return rest.StartREST(buildBlueprint(initRoutes(client)))
 }
 
 func main() {
