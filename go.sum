@@ -119,6 +119,7 @@ github.com/nawaphonOHM/whatever v1.2.0 h1:z+tQam3tF/yXMawTrQ+3ZRJtoAoqfqWGGAAStt
 github.com/nawaphonOHM/whatever v1.2.0/go.mod h1:bSejdx2FcEPv1GwVnUPdtJicMCzvzg+dA70GED28sXA=
 github.com/nawaphonOHM/whatever v1.3.0 h1:0rlH7EpGdP5DcFaEfv4HebvfoH2V86cWq0B15m79OUU=
 github.com/nawaphonOHM/whatever v1.3.0/go.mod h1:bSejdx2FcEPv1GwVnUPdtJicMCzvzg+dA70GED28sXA=
+github.com/nawaphonOHM/whatever v1.4.0/go.mod h1:bSejdx2FcEPv1GwVnUPdtJicMCzvzg+dA70GED28sXA=
 github.com/opencontainers/go-digest v1.0.0 h1:apOUWs51W5PlhuyGyz9FCeeBIOUDA/6nW8Oi/yOhh5U=
 github.com/opencontainers/go-digest v1.0.0/go.mod h1:0JzlMkj0TRzQZfJkVvzbP0HBR3IKzErnv2BNG4W4MAM=
 github.com/opencontainers/image-spec v1.1.1 h1:y0fUlFfIZhPF1W537XOLg0/fcx6zcHCJwooC2xJA040=
