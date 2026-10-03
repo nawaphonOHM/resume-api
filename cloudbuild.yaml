@@ -19,7 +19,7 @@ steps:
       - '--image=$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_SHORT_SHA'
       - '--region=$_LOCATION'
       - '--platform=managed'
-      - '--no-allow-unauthenticated'
+      - '--allow-unauthenticated'
       - '--service-account=$_SERVICE_ACCOUNT_EMAIL_ONLY'
       - '--ingress=internal-and-cloud-load-balancing'
       - '--startup-probe=httpGet.port=8080,httpGet.path=/health,timeoutSeconds=1,periodSeconds=10,failureThreshold=3'
