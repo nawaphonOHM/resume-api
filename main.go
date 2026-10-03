@@ -38,6 +38,13 @@ func run() error {
 }
 
 func main() {
+	logger := logging.New(logging.Config{
+		Output: os.Stdout,
+		Level:  logging.LevelInfo,
+		Format: logging.FormatJSON,
+	})
+	logging.SetDefault(logger)
+
 	if err := run(); err != nil {
 		logging.Error("server stopped with error", "error", err)
 		os.Exit(1)
