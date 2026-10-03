@@ -140,9 +140,13 @@ Static analysis is enforced via `.golangci.yml` incorporating the complete rules
 |---|---|
 | `make build` | Compiles binary to `bin/resume-api` |
 | `make run` | Starts the service locally |
-| `make test` | Executes unit tests with race detection (`go test -race ./...`) |
-| `make test-coverage` | Runs tests and generates `coverage.html` |
-| `make vet` | Runs `go vet ./...` |
-| `make lint` | Executes `golangci-lint run` across the codebase |
+| `make test-unit` | Executes unit tests with race detection without integration services |
+| `make test-integration-tc` | Runs Testcontainers-backed integration tests with race detection |
+| `make test-integration-real` | Runs real MongoDB integration tests with race detection (requires `MONGODB_URI`) |
+| `make test-integration` | Runs both integration suites with race detection |
+| `make test` | Runs the full unit and integration test suite with race detection |
+| `make test-coverage` | Runs all tagged tests and generates `coverage.html` |
+| `make vet` | Runs `go vet` across all integration build tags |
+| `make lint` | Executes `golangci-lint` across all integration build tags |
 | `make tidy` | Tidies and synchronizes `go.mod` and `go.sum` |
 | `make clean` | Cleans up binaries and coverage profiles |
