@@ -18,8 +18,7 @@ func buildCorsSetting() *rest.CorsSetting {
 }
 
 func buildBlueprint(routes *rest.RRestAPIRegistration) *rest.BluePrint {
-	meta := rest.NewMeta().WithCors(buildCorsSetting())
-	return rest.NewBluePrint().WithAPIs(routes).WithMeta(meta)
+	return rest.NewBluePrint().WithAPIs(routes)
 }
 
 func initRoutes(client *mongodb.Client) *rest.RRestAPIRegistration {

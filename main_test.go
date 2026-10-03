@@ -38,16 +38,6 @@ func TestBuildCorsSetting(t *testing.T) {
 	assertCorsMethods(t, cors.AllowHTTPMethods())
 }
 
-func assertBlueprintMeta(t *testing.T, bp *rest.BluePrint) {
-	t.Helper()
-	if bp.Meta() == nil {
-		t.Fatal("expected non-nil meta")
-	}
-	if bp.Meta().Cors() == nil {
-		t.Fatal("expected non-nil cors in meta")
-	}
-}
-
 func assertBlueprintApis(t *testing.T, bp *rest.BluePrint, expected *rest.RRestAPIRegistration) {
 	t.Helper()
 	apis := bp.Apis()
@@ -65,7 +55,6 @@ func TestBuildBlueprint(t *testing.T) {
 	if bp == nil {
 		t.Fatal("expected non-nil blueprint")
 	}
-	assertBlueprintMeta(t, bp)
 	assertBlueprintApis(t, bp, routes)
 }
 
