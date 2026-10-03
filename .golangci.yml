@@ -11,6 +11,9 @@ run:
   # Default: 0 (automatically set to match Linux container CPU quota and
   # fall back to the number of logical CPUs in the machine)
   concurrency: 2
+  build-tags:
+    - testcontainers
+    - realmongo
 
 linters:
   # Enable specific linter.
