@@ -1,3 +1,5 @@
+//go:build testcontainers
+
 // Package resume defines domain data models, repository interfaces, and services for resume data.
 package resume
 
