@@ -2,7 +2,7 @@ module github.com/nawaphonOHM/resume-api
 
 go 1.27.1
 
-require github.com/nawaphonOHM/whatever/v2 v2.0.0
+require github.com/nawaphonOHM/whatever/v2 v2.0.1
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
