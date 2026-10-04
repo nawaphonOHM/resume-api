@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 func assertNoError(t *testing.T, err error) {

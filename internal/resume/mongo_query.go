@@ -4,7 +4,7 @@ package resume
 import (
 	"context"
 
-	"github.com/nawaphonOHM/whatever/pkg/mongodb"
+	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
 )
 
 type cursor interface {

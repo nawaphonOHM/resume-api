@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 func verifyRouteAPI(t *testing.T, api *rest.ExportableAPI, path string) {

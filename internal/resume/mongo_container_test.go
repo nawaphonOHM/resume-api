@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nawaphonOHM/whatever/pkg/mongodb"
-	tcmongodb "github.com/nawaphonOHM/whatever/pkg/testcontainers/mongodb"
+	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
+	tcmongodb "github.com/nawaphonOHM/whatever/v2/pkg/testcontainers/mongodb"
 )
 
 var (

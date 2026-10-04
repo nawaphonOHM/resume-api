@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/pkg/testing/mongodb"
+	"github.com/nawaphonOHM/whatever/v2/pkg/testing/mongodb"
 )
 
 const mongoURIEnv = "MONGODB_URI"
