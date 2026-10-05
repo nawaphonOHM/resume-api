@@ -38,6 +38,7 @@ steps:
       - '--set-secrets=OHM9996_SERVER_HOST=OHM9996_SERVER_HOST:2'
       - '--set-secrets=OHM9996_SERVER_PORT=OHM9996_SERVER_PORT:1'
       - '--set-secrets=OHM9996_MONGODB_ENABLE_PING=OHM9996_MONGODB_ENABLE_PING:1'
+      - '--set-secrets=OHM9996_LOGGING_FORMAT=OHM9996_LOGGING_FORMAT:1'
 
 # Specify your custom service account
 serviceAccount: '$_SERVICE_ACCOUNT_URL_PATH'
