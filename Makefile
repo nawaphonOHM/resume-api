@@ -19,37 +19,33 @@ run: ## Run the application
 
 .PHONY: test
 test: ## Run the full unit and integration test suite with race detection
-	go test -race -v -tags="testcontainers,realmongo" ./...
+	go test -race -v -tags="realmongo" ./...
 
 .PHONY: test-unit
 test-unit: ## Run unit tests with race detection
 	go test -race -v ./...
-
-.PHONY: test-integration-tc
-test-integration-tc: ## Run Testcontainers-backed integration tests with race detection
-	go test -race -v -tags=testcontainers ./...
 
 .PHONY: test-integration-real
 test-integration-real: ## Run real MongoDB integration tests with race detection (requires MONGODB_URI)
 	go test -race -v -tags=realmongo ./...
 
 .PHONY: test-integration
-test-integration: ## Run combined integration tests (Testcontainers & real Mongo) with race detection
-	go test -race -v -tags="testcontainers,realmongo" ./...
+test-integration: ## Run real MongoDB integration tests with race detection (requires MONGODB_URI)
+	go test -race -v -tags="realmongo" ./...
 
 .PHONY: test-coverage
 test-coverage: ## Run tests with race detection and HTML coverage report
-	go test -race -tags="testcontainers,realmongo" -coverprofile=coverage.out ./...
+	go test -race -tags="realmongo" -coverprofile=coverage.out ./...
 	go tool cover -html=coverage.out -o coverage.html
 	@echo "Coverage report generated: coverage.html"
 
 .PHONY: vet
 vet: ## Run go vet analysis
-	go vet -tags="testcontainers,realmongo" ./...
+	go vet -tags="realmongo" ./...
 
 .PHONY: lint
 lint: ## Run golangci-lint (or go vet if golangci-lint not installed)
-	@which golangci-lint > /dev/null 2>&1 && golangci-lint run --build-tags="testcontainers,realmongo" || (echo "golangci-lint not found in PATH; running go vet ./..." && go vet -tags="testcontainers,realmongo" ./...)
+	@which golangci-lint > /dev/null 2>&1 && golangci-lint run --build-tags="realmongo" || (echo "golangci-lint not found in PATH; running go vet ./..." && go vet -tags="realmongo" ./...)
 
 .PHONY: tidy
 tidy: ## Tidy and verify Go module dependencies

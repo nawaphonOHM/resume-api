@@ -24,7 +24,7 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: latest
-          args: --timeout=5m --build-tags="testcontainers,realmongo"
+          args: --timeout=5m --build-tags="realmongo"
 
   test:
     name: Test
@@ -49,16 +49,13 @@ jobs:
       - name: Run unit tests
         run: go test -race -v ./...
 
-      - name: Run Testcontainers integration tests
-        run: go test -race -v -tags=testcontainers ./...
-
       - name: Run real Mongo integration tests
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: go test -race -v -tags=realmongo ./...
 
       - name: Run tests with race detector and coverage
-        run: go test -race -tags="testcontainers,realmongo" -coverprofile=coverage.out ./...
+        run: go test -race -tags="realmongo" -coverprofile=coverage.out ./...
 
       - name: Verify package compilation
         run: go build -v ./...

@@ -12,7 +12,6 @@ run:
   # fall back to the number of logical CPUs in the machine)
   concurrency: 2
   build-tags:
-    - testcontainers
     - realmongo
 
 linters:
