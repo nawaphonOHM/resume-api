@@ -4,6 +4,7 @@
 package resume
 
 import (
+	"context"
 	"os"
 	"testing"
 
@@ -23,6 +24,11 @@ func requireMongoURI(t *testing.T) string {
 
 func connectURIRepository(t *testing.T) *MongoRepository {
 	t.Helper()
-	client := mongodb.NewTestClientURI(t, requireMongoURI(t))
+	uri := requireMongoURI(t)
+	restore := mongodb.SetMockProbe(func(context.Context, *mongodb.Client, string) error {
+		return nil
+	})
+	t.Cleanup(restore)
+	client := mongodb.NewTestClientURI(t, uri)
 	return NewMongoRepository(client.Client())
 }
