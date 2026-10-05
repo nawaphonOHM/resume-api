@@ -4,10 +4,11 @@
 package resume
 
 import (
+	"context"
 	"os"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/pkg/testing/mongodb"
+	"github.com/nawaphonOHM/whatever/v2/pkg/testing/mongodb"
 )
 
 const mongoURIEnv = "MONGODB_URI"
@@ -23,6 +24,11 @@ func requireMongoURI(t *testing.T) string {
 
 func connectURIRepository(t *testing.T) *MongoRepository {
 	t.Helper()
-	client := mongodb.NewTestClientURI(t, requireMongoURI(t))
+	uri := requireMongoURI(t)
+	restore := mongodb.SetMockProbe(func(context.Context, *mongodb.Client, string) error {
+		return nil
+	})
+	t.Cleanup(restore)
+	client := mongodb.NewTestClientURI(t, uri)
 	return NewMongoRepository(client.Client())
 }

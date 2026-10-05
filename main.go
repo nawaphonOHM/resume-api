@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/nawaphonOHM/resume-api/internal/resume"
-	"github.com/nawaphonOHM/whatever/pkg/logging"
-	"github.com/nawaphonOHM/whatever/pkg/mongodb"
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/logging"
+	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 const allowedOrigin = "resume.ohm-mho.space"
@@ -37,13 +37,6 @@ func run() error {
 }
 
 func main() {
-	logger := logging.New(logging.Config{
-		Output: os.Stdout,
-		Level:  logging.LevelInfo,
-		Format: logging.FormatJSON,
-	})
-	logging.SetDefault(logger)
-
 	if err := run(); err != nil {
 		logging.Error("server stopped with error", "error", err)
 		os.Exit(1)

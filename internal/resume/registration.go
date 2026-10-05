@@ -2,7 +2,7 @@
 package resume
 
 import (
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 // Routes returns the route registration for resume API version 1.

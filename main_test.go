@@ -4,7 +4,7 @@ package main
 import (
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 const expectedTotalRoutes = 6

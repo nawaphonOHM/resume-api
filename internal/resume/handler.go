@@ -5,7 +5,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/nawaphonOHM/whatever/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
 )
 
 // Handler handles REST requests for resume data.
