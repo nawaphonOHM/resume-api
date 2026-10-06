@@ -33,13 +33,13 @@ jobs:
 
       - name: Replace Parameter in cloudbuild.yaml
         run: |
-          sed -i "s/{{IMAGE_NAME}}/${{ vars.IMAGE_NAME }}/g" cloudbuild.yaml
-          sed -i "s/{{SHORT_SHA}}/${{ env.SHORT_SHA }}/g" cloudbuild.yaml
-          sed -i "s/{{BUILDER}}/${{ vars.BUILDER }}/g" cloudbuild.yaml
-          sed -i "s/{{SERVICE_NAME}}/${{ vars.SERVICE_NAME }}/g" cloudbuild.yaml
-          sed -i "s/{{SERVICE_ACCOUNT}}/${{ secrets.SERVICE_ACCOUNT }}/g" cloudbuild.yaml
-          sed -i "s/{{LOCATION}}/${{ vars.LOCATION }}/g" cloudbuild.yaml
-          sed -i "s/{{REPO_NAME}}/${{ vars.REPO_NAME }}/g" cloudbuild.yaml
+          sed -i "s/_IMAGE_NAME_/${{ vars.IMAGE_NAME }}/g" cloudbuild.yaml
+          sed -i "s/_SHORT_SHA_/${{ env.SHORT_SHA }}/g" cloudbuild.yaml
+          sed -i "s/_BUILDER_/${{ vars.BUILDER }}/g" cloudbuild.yaml
+          sed -i "s/_SERVICE_NAME_/${{ vars.SERVICE_NAME }}/g" cloudbuild.yaml
+          sed -i "s/_SERVICE_ACCOUNT_/${{ secrets.SERVICE_ACCOUNT }}/g" cloudbuild.yaml
+          sed -i "s/_LOCATION_/${{ vars.LOCATION }}/g" cloudbuild.yaml
+          sed -i "s/_REPO_NAME_/${{ vars.REPO_NAME }}/g" cloudbuild.yaml
 
       - name: Submit Cloud Build
         run: |
