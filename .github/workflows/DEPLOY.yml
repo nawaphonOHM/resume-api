@@ -19,7 +19,6 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL_ONLY }}
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_FEDERATION_PROVIDER }}
 
       - name: Set up Cloud SDK
