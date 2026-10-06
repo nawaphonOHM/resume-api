@@ -41,13 +41,13 @@ jobs:
           LOCATION: ${{ vars.LOCATION }}
           REPO_NAME: ${{ vars.REPO_NAME }}
         run: |
-          sed -i "s/_IMAGE_NAME_/$IMAGE_NAME/g" cloudbuild.yaml
-          sed -i "s/_SHORT_SHA_/$SHORT_SHA/g" cloudbuild.yaml
-          sed -i "s/_BUILDER_/$BUILDER/g" cloudbuild.yaml
-          sed -i "s/_SERVICE_NAME_/$SERVICE_NAME/g" cloudbuild.yaml
-          sed -i "s/_SERVICE_ACCOUNT_/$SERVICE_ACCOUNT/g" cloudbuild.yaml
-          sed -i "s/_LOCATION_/$LOCATION/g" cloudbuild.yaml
-          sed -i "s/_REPO_NAME_/$REPO_NAME/g" cloudbuild.yaml
+          sed -i "s|_IMAGE_NAME_|$IMAGE_NAME|g" cloudbuild.yaml
+          sed -i "s|_SHORT_SHA_|$SHORT_SHA|g" cloudbuild.yaml
+          sed -i "s|_BUILDER_|$BUILDER|g" cloudbuild.yaml
+          sed -i "s|_SERVICE_NAME_|$SERVICE_NAME|g" cloudbuild.yaml
+          sed -i "s|_SERVICE_ACCOUNT_|$SERVICE_ACCOUNT|g" cloudbuild.yaml
+          sed -i "s|_LOCATION_|$LOCATION|g" cloudbuild.yaml
+          sed -i "s|_REPO_NAME_|$REPO_NAME|g" cloudbuild.yaml
 
       - name: Submit Cloud Build
         run: |
