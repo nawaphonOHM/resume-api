@@ -1,7 +1,7 @@
 steps:
   # Step 1: Build the Docker image and push to the registry
   - name: 'docker.io/buildpacksio/pack'
-    id: 'Build Image from buildId $BUILD_ID'
+    id: 'Build Image'
     args:
       - 'build'
       - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_SHORT_SHA'
@@ -20,7 +20,7 @@ steps:
       - '--region=$_LOCATION'
       - '--platform=managed'
       - '--allow-unauthenticated'
-      - '--service-account=$_SERVICE_ACCOUNT_EMAIL_ONLY'
+      - '--service-account=$_SERVICE_ACCOUNT'
       - '--ingress=internal-and-cloud-load-balancing'
       - '--network=default'
       - '--subnet=default'
@@ -41,7 +41,17 @@ steps:
       - '--set-secrets=OHM9996_LOGGING_FORMAT=OHM9996_LOGGING_FORMAT:1'
 
 # Specify your custom service account
-serviceAccount: '$_SERVICE_ACCOUNT_URL_PATH'
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/$_SERVICE_ACCOUNT'
+
+substitutions:
+  _LOCATION: {{LOCATION}}
+  _REPO_NAME: {{REPO_NAME}}
+  _IMAGE_NAME: {{IMAGE_NAME}}
+  _SHORT_SHA: {{SHORT_SHA}}
+  _BUILDER: {{BUILDER}}
+  _SERVICE_NAME: {{SERVICE_NAME}}
+  _SERVICE_ACCOUNT: {{SERVICE_ACCOUNT}}
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
