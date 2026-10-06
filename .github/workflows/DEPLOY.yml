@@ -19,8 +19,7 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL_ONLY }}
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_FEDERATION_PROVIDER }}
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ secrets.WORKLOAD_IDENTITY_POOL }}/providers/${{ secrets.PROVIDER }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -32,8 +31,16 @@ jobs:
         run: |
           echo "SHORT_SHA=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
 
+      - name: Replace Parameter in cloudbuild.yaml
+        run: |
+          sed -i "s/{{IMAGE_NAME}}/${{ vars.IMAGE_NAME }}/g" cloudbuild.yaml
+          sed -i "s/{{SHORT_SHA}}/${{ env.SHORT_SHA }}/g" cloudbuild.yaml
+          sed -i "s/{{BUILDER}}/${{ vars.BUILDER }}/g" cloudbuild.yaml
+          sed -i "s/{{SERVICE_NAME}}/${{ vars.SERVICE_NAME }}/g" cloudbuild.yaml
+          sed -i "s/{{SERVICE_ACCOUNT}}/${{ secrets.SERVICE_ACCOUNT }}/g" cloudbuild.yaml
+          sed -i "s/{{LOCATION}}/${{ vars.LOCATION }}/g" cloudbuild.yaml
+          sed -i "s/{{REPO_NAME}}/${{ vars.REPO_NAME }}/g" cloudbuild.yaml
+
       - name: Submit Cloud Build
         run: |
-          gcloud builds submit \
-          --region=${{ vars.LOCATION }} \
-          --substitutions=_IMAGE_NAME=resume-api,_REPO_NAME=resume-api-images,_SERVICE_NAME=resume-api-service,_BUILDER=${{ vars.BUILDER }},_LOCATION=${{ vars.LOCATION }},_SHORT_SHA=${{ env.SHORT_SHA }},_SERVICE_ACCOUNT_EMAIL_ONLY=${{ secrets.SERVICE_ACCOUNT_EMAIL_ONLY }},_SERVICE_ACCOUNT_URL_PATH=${{ secrets.SERVICE_ACCOUNT_URL_PATH }}
+          gcloud builds submit
