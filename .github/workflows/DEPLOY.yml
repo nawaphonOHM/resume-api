@@ -60,5 +60,6 @@ jobs:
       - name: Submit Cloud Build
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          REGION: ${{ vars.LOCATION }}
         run: |
-          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME --service-account projects/$PROJECT_ID/serviceAccounts/$SERVICE_ACCOUNT
+          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME --service-account projects/$PROJECT_ID/serviceAccounts/$SERVICE_ACCOUNT --region $REGION
