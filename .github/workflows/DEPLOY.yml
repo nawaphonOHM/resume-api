@@ -7,6 +7,9 @@ permissions:
   id-token: write # Required for requesting the JWT/OIDC token
   contents: read  # Required for actions/checkout
 
+env:
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+
 jobs:
   deploy:
     name: Deploy
@@ -38,7 +41,6 @@ jobs:
           SHORT_SHA: ${{ env.SHORT_SHA }}
           BUILDER: ${{ vars.BUILDER }}
           SERVICE_NAME: ${{ vars.SERVICE_NAME }}
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
           LOCATION: ${{ vars.LOCATION }}
           REPO_NAME: ${{ vars.REPO_NAME }}
         run: |
@@ -56,5 +58,7 @@ jobs:
           echo "COMPRESSED_PROJECT_NAME=$(uuidgen | tr -d '-').tar.gz" >> $GITHUB_ENV
 
       - name: Submit Cloud Build
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME
+          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME --service-account projects/$PROJECT_ID/serviceAccounts/$SERVICE_ACCOUNT
