@@ -58,5 +58,7 @@ jobs:
           echo "COMPRESSED_PROJECT_NAME=$(uuidgen | tr -d '-').tar.gz" >> $GITHUB_ENV
 
       - name: Submit Cloud Build
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME --service-account $SERVICE_ACCOUNT
+          gcloud builds submit gs://resume-api_cloudbuild/$COMPRESSED_PROJECT_NAME --service-account projects/$PROJECT_ID/serviceAccounts/$SERVICE_ACCOUNT
