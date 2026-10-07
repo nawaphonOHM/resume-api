@@ -52,11 +52,6 @@ jobs:
           sed -i "s|_LOCATION_|$LOCATION|g" cloudbuild.yaml
           sed -i "s|_REPO_NAME_|$REPO_NAME|g" cloudbuild.yaml
 
-      - name: Generate Compressed Project Name
-        id: COMPRESSED_PROJECT_NAME
-        run: |
-          echo "COMPRESSED_PROJECT_NAME=$(uuidgen | tr -d '-').tar.gz" >> $GITHUB_ENV
-
       - name: Submit Cloud Build
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
