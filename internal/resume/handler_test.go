@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v3/pkg/rest"
 )
 
 const expectedTotalRoutes = 6

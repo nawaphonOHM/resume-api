@@ -4,7 +4,7 @@ package resume
 import (
 	"context"
 
-	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
+	"github.com/nawaphonOHM/whatever/v3/pkg/mongodb"
 )
 
 // MongoRepository implements Repository using MongoDB client.

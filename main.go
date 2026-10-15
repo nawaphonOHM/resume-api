@@ -6,16 +6,10 @@ import (
 	"os"
 
 	"github.com/nawaphonOHM/resume-api/internal/resume"
-	"github.com/nawaphonOHM/whatever/v2/pkg/logging"
-	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
-	"github.com/nawaphonOHM/whatever/v2/pkg/rest"
+	"github.com/nawaphonOHM/whatever/v3/pkg/logging"
+	"github.com/nawaphonOHM/whatever/v3/pkg/mongodb"
+	"github.com/nawaphonOHM/whatever/v3/pkg/rest"
 )
-
-const allowedOrigin = "resume.ohm-mho.space"
-
-func buildCorsSetting() *rest.CorsSetting {
-	return rest.NewCorsSetting().WithAllowHTTPMethods(rest.GET).WithAllowOrigin(allowedOrigin)
-}
 
 func buildBlueprint(routes *rest.RRestAPIRegistration) *rest.BluePrint {
 	return rest.NewBluePrint().WithAPIs(routes)
