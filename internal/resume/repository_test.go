@@ -6,7 +6,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nawaphonOHM/whatever/v2/pkg/mongodb"
+	"github.com/nawaphonOHM/whatever/v3/pkg/mongodb"
 )
 
 type mockCursor struct {
