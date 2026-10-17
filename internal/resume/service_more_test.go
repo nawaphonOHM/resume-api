@@ -3,8 +3,17 @@ package resume
 
 import (
 	"context"
+	"net/http"
 	"testing"
 )
+
+type emptyTitleRepository struct {
+	Repository
+}
+
+func (emptyTitleRepository) GetLatestTitles(context.Context) (string, error) {
+	return "", nil
+}
 
 func TestService_GetLinks(t *testing.T) {
 	repo := &MemoryRepository{Links: []*LinkItem{{
@@ -36,14 +45,21 @@ func TestService_GetName(t *testing.T) {
 }
 
 func TestService_GetTitles(t *testing.T) {
-	repo := &MemoryRepository{Titles: []string{"Engineer"}}
+	repo := &MemoryRepository{Titles: "Engineer"}
 	svc := NewService(repo)
 	res, err := svc.GetTitles(context.Background())
 	assertNoError(t, err)
-	if len(res) == 0 {
-		t.Fatal("expected title items")
+	if res != "Engineer" {
+		t.Fatalf("unexpected title: %s", res)
 	}
-	repo.Titles = nil
+	repo.Titles = ""
 	_, err = svc.GetTitles(context.Background())
 	assertNotFound(t, err)
+}
+
+func TestService_GetTitles_EmptyRepositoryValue(t *testing.T) {
+	svc := NewService(emptyTitleRepository{})
+	_, err := svc.GetTitles(context.Background())
+	assertNotFound(t, err)
+	assertStatus(t, NewHandler(svc).GetTitles(nil), http.StatusNotFound)
 }

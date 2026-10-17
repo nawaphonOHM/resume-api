@@ -26,5 +26,5 @@ type Repository interface {
 	// GetLatestSummaries retrieves the latest summaries document.
 	GetLatestSummaries(context.Context) ([]string, error)
 	// GetLatestTitles retrieves the latest titles document.
-	GetLatestTitles(context.Context) ([]string, error)
+	GetLatestTitles(context.Context) (string, error)
 }

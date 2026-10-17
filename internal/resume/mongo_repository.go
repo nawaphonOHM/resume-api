@@ -55,10 +55,10 @@ func (r *MongoRepository) GetLatestNames(ctx context.Context) (string, error) {
 }
 
 // GetLatestTitles retrieves the latest titles document.
-func (r *MongoRepository) GetLatestTitles(ctx context.Context) ([]string, error) {
-	res, err := queryLatest[[]string](ctx, r.client, "title")
+func (r *MongoRepository) GetLatestTitles(ctx context.Context) (string, error) {
+	res, err := queryLatest[string](ctx, r.client, "title")
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	return *res, nil
 }
