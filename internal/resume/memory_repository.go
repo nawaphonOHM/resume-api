@@ -12,7 +12,9 @@ type MemoryRepository struct {
 	Err        error
 	Name       string
 	Links      []*LinkItem
-	Titles     []string
+	Skills     []string
+	Summaries  []string
+	Titles     string
 	Experience []*ExperienceItem
 }
 
@@ -84,12 +86,12 @@ func (m *MemoryRepository) GetLatestNames(ctx context.Context) (string, error) {
 }
 
 // GetLatestTitles returns the in-memory titles or ErrNotFound.
-func (m *MemoryRepository) GetLatestTitles(ctx context.Context) ([]string, error) {
+func (m *MemoryRepository) GetLatestTitles(ctx context.Context) (string, error) {
 	if err := m.checkErr(ctx); err != nil {
-		return nil, err
+		return "", err
 	}
-	if m.Titles == nil {
-		return nil, ErrNotFound
+	if m.Titles == "" {
+		return "", ErrNotFound
 	}
 	return m.Titles, nil
 }

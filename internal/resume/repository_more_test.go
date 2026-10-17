@@ -87,7 +87,7 @@ func TestMemoryRepository_Positive(t *testing.T) {
 		Experience: []*ExperienceItem{{Company: "Acme"}},
 		Links:      []*LinkItem{{Label: "Web"}},
 		Name:       "Jane Doe",
-		Titles:     []string{"Lead Engineer"},
+		Titles:     "Lead Engineer",
 	}
 	ctx := context.Background()
 	testPositiveFirst(t, ctx, repo)

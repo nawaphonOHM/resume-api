@@ -122,6 +122,36 @@ The application is configured through environment variables prefixed with `OHM99
         "code": "RESUME_NOT_FOUND"
       }
       ```
+- `GET /v1/summaries`: Retrieve the latest resume summary.
+    - **Success Response (200 OK)**:
+      ```json
+      {
+        "success": true,
+        "data": ["Summary item 1", "Summary item 2"],
+        "timestamp": "2026-09-28T22:00:00Z"
+      }
+      ```
+    - **Note**: Queries collection `"summary"` in MongoDB (shape: `{ "value": [...] }`). Returns 404 if unseeded or empty.
+- `GET /v1/skills`: Retrieve the latest skills list.
+    - **Success Response (200 OK)**:
+      ```json
+      {
+        "success": true,
+        "data": ["Go", "MongoDB"],
+        "timestamp": "2026-09-28T22:00:00Z"
+      }
+      ```
+    - **Note**: Queries collection `"skill"` in MongoDB (shape: `{ "value": [...] }`). Returns 404 if unseeded or empty.
+- **404 for `/v1/summaries` and `/v1/skills`** (RFC 9457 Problem Details):
+  ```json
+  {
+    "type": "about:blank",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "resource not found",
+    "code": "NOT_FOUND"
+  }
+  ```
 
 ---
 

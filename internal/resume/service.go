@@ -17,8 +17,12 @@ type Service interface {
 	GetLinks(context.Context) ([]*LinkItem, error)
 	// GetNames retrieves the latest display name.
 	GetNames(context.Context) (string, error)
-	// GetTitles retrieves the latest list of titles.
-	GetTitles(context.Context) ([]string, error)
+	// GetSkills retrieves the latest skills list.
+	GetSkills(context.Context) ([]string, error)
+	// GetSummaries retrieves the latest resume summaries.
+	GetSummaries(context.Context) ([]string, error)
+	// GetTitles retrieves the latest professional title.
+	GetTitles(context.Context) (string, error)
 }
 
 type resumeService struct {
@@ -50,6 +54,13 @@ func (s *resumeService) GetNames(ctx context.Context) (string, error) {
 	return s.repo.GetLatestNames(ctx)
 }
 
-func (s *resumeService) GetTitles(ctx context.Context) ([]string, error) {
-	return s.repo.GetLatestTitles(ctx)
+func (s *resumeService) GetTitles(ctx context.Context) (string, error) {
+	title, err := s.repo.GetLatestTitles(ctx)
+	if err != nil {
+		return "", err
+	}
+	if title == "" {
+		return "", ErrNotFound
+	}
+	return title, nil
 }

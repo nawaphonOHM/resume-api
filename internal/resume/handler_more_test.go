@@ -24,10 +24,10 @@ func TestHandler_GetNames(t *testing.T) {
 }
 
 func TestHandler_GetTitles(t *testing.T) {
-	repo := &MemoryRepository{Titles: []string{"Architect"}}
+	repo := &MemoryRepository{Titles: "Architect"}
 	h := NewHandler(NewService(repo))
 	assertStatus(t, h.GetTitles(nil), http.StatusOK)
-	repo.Titles = nil
+	repo.Titles = ""
 	assertStatus(t, h.GetTitles(nil), http.StatusNotFound)
 }
 

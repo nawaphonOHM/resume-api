@@ -32,7 +32,7 @@ func verifyRoutesHeader(t *testing.T, reg *rest.RRestAPIRegistration) {
 
 func verifyRoutesAPIs(t *testing.T, apis []*rest.ExportableAPI) {
 	t.Helper()
-	paths := []string{"/details", "/educations", "/experiences", "/links", "/names", "/titles"}
+	paths := []string{"/details", "/educations", "/experiences", "/links", "/names", "/skills", "/summaries", "/titles"}
 	if len(apis) != len(paths) {
 		t.Fatalf("expected %d apis, got %d", len(paths), len(apis))
 	}
@@ -41,18 +41,18 @@ func verifyRoutesAPIs(t *testing.T, apis []*rest.ExportableAPI) {
 	}
 }
 
-func verifyEndpointOK(t *testing.T, api *rest.ExportableAPI) {
+func verifyEndpointStatus(t *testing.T, api *rest.ExportableAPI) {
 	t.Helper()
-	status := api.Handler(nil).StatusCode()
-	if status != http.StatusOK {
-		t.Fatalf("endpoint %s returned unexpected status: %d", api.Path, status)
+	resp := api.Handler(nil)
+	if resp.StatusCode() != http.StatusOK {
+		t.Fatalf("endpoint %s returned unexpected status: %d", api.Path, resp.StatusCode())
 	}
 }
 
 func verifyRegisteredEndpoints(t *testing.T, apis []*rest.ExportableAPI) {
 	t.Helper()
 	for _, api := range apis {
-		verifyEndpointOK(t, api)
+		verifyEndpointStatus(t, api)
 	}
 }
 
@@ -64,4 +64,5 @@ func TestRoutes_Integration_Mongo(t *testing.T) {
 	verifyRoutesHeader(t, reg)
 	verifyRoutesAPIs(t, reg.Apis)
 	verifyRegisteredEndpoints(t, reg.Apis)
+	verifyPayloadIntegrity(t, reg.Apis)
 }

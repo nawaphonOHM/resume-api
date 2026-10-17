@@ -21,6 +21,10 @@ type Repository interface {
 	GetLatestLinks(context.Context) ([]*LinkItem, error)
 	// GetLatestNames retrieves the latest name document.
 	GetLatestNames(context.Context) (string, error)
+	// GetLatestSkills retrieves the latest skills document.
+	GetLatestSkills(context.Context) ([]string, error)
+	// GetLatestSummaries retrieves the latest summaries document.
+	GetLatestSummaries(context.Context) ([]string, error)
 	// GetLatestTitles retrieves the latest titles document.
-	GetLatestTitles(context.Context) ([]string, error)
+	GetLatestTitles(context.Context) (string, error)
 }

@@ -4,6 +4,7 @@ package resume
 import (
 	"context"
 	"errors"
+	"reflect"
 	"testing"
 )
 
@@ -17,12 +18,33 @@ func assertName(t *testing.T, val *string) {
 	}
 }
 
+func assertStrings(t *testing.T, val *[]string) {
+	t.Helper()
+	if val == nil {
+		t.Fatal("expected non-nil val")
+	}
+	if !reflect.DeepEqual(*val, []string{"Item 1", "Item 2"}) {
+		t.Fatalf("unexpected val: %v", *val)
+	}
+}
+
 func TestDecodeCursor_Success(t *testing.T) {
 	ctx := context.Background()
 	cur := &mockCursor{next: true}
 	val, err := decodeCursor[string](ctx, cur)
 	assertNoError(t, err)
 	assertName(t, val)
+	if !cur.closed {
+		t.Fatal("expected cursor to be closed")
+	}
+}
+
+func TestDecodeCursor_StringSlice_Success(t *testing.T) {
+	ctx := context.Background()
+	cur := &mockCursor{next: true}
+	val, err := decodeCursor[[]string](ctx, cur)
+	assertNoError(t, err)
+	assertStrings(t, val)
 	if !cur.closed {
 		t.Fatal("expected cursor to be closed")
 	}
