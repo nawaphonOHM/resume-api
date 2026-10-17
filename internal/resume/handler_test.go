@@ -8,7 +8,7 @@ import (
 	"github.com/nawaphonOHM/whatever/v3/pkg/rest"
 )
 
-const expectedTotalRoutes = 6
+const expectedTotalRoutes = 8
 
 func TestHandler_GetDetails(t *testing.T) {
 	repo := &MemoryRepository{Details: &Details{Email: "test@example.com"}}

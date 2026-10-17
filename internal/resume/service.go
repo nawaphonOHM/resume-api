@@ -17,6 +17,10 @@ type Service interface {
 	GetLinks(context.Context) ([]*LinkItem, error)
 	// GetNames retrieves the latest display name.
 	GetNames(context.Context) (string, error)
+	// GetSkills retrieves the latest skills list.
+	GetSkills(context.Context) ([]string, error)
+	// GetSummaries retrieves the latest resume summaries.
+	GetSummaries(context.Context) ([]string, error)
 	// GetTitles retrieves the latest list of titles.
 	GetTitles(context.Context) ([]string, error)
 }

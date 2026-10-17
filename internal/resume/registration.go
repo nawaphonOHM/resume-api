@@ -16,6 +16,8 @@ func Routes(h *Handler) *rest.RRestAPIRegistration {
 			{Path: "/experiences", Method: rest.GET, Handler: h.GetExperiences},
 			{Path: "/links", Method: rest.GET, Handler: h.GetLinks},
 			{Path: "/names", Method: rest.GET, Handler: h.GetNames},
+			{Path: "/skills", Method: rest.GET, Handler: h.GetSkills},
+			{Path: "/summaries", Method: rest.GET, Handler: h.GetSummaries},
 			{Path: "/titles", Method: rest.GET, Handler: h.GetTitles},
 		},
 	}

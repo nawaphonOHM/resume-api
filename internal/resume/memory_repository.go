@@ -12,6 +12,8 @@ type MemoryRepository struct {
 	Err        error
 	Name       string
 	Links      []*LinkItem
+	Skills     []string
+	Summaries  []string
 	Titles     []string
 	Experience []*ExperienceItem
 }

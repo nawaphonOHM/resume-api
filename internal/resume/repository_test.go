@@ -22,13 +22,20 @@ func (m *mockCursor) Close(context.Context) error {
 	m.closed = true
 	return nil
 }
+func assignMockDoc(v any) {
+	switch d := v.(type) {
+	case *Document[string]:
+		*d = Document[string]{Value: "test-name"}
+	case *Document[[]string]:
+		*d = Document[[]string]{Value: []string{"Item 1", "Item 2"}}
+	}
+}
+
 func (m *mockCursor) Decode(v any) error {
 	if m.decodeErr != nil {
 		return m.decodeErr
 	}
-	if d, ok := v.(*Document[string]); ok {
-		*d = Document[string]{Value: "test-name"}
-	}
+	assignMockDoc(v)
 	return nil
 }
 

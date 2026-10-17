@@ -32,7 +32,7 @@ func verifyRoutesHeader(t *testing.T, reg *rest.RRestAPIRegistration) {
 
 func verifyRoutesAPIs(t *testing.T, apis []*rest.ExportableAPI) {
 	t.Helper()
-	paths := []string{"/details", "/educations", "/experiences", "/links", "/names", "/titles"}
+	paths := []string{"/details", "/educations", "/experiences", "/links", "/names", "/skills", "/summaries", "/titles"}
 	if len(apis) != len(paths) {
 		t.Fatalf("expected %d apis, got %d", len(paths), len(apis))
 	}
@@ -41,9 +41,26 @@ func verifyRoutesAPIs(t *testing.T, apis []*rest.ExportableAPI) {
 	}
 }
 
-func verifyEndpointOK(t *testing.T, api *rest.ExportableAPI) {
+func isNewEndpoint(path rest.Pathz) bool {
+	return path == "/skills" || path == "/summaries"
+}
+
+// verifyNewEndpointStatus ensures new endpoints return 200 (if collection is seeded)
+// or 404 (if unseeded in the live DB), but never accept 500 internal errors.
+func verifyNewEndpointStatus(t *testing.T, path rest.Pathz, status int) {
+	t.Helper()
+	if status != http.StatusOK && status != http.StatusNotFound {
+		t.Fatalf("new endpoint %s returned unexpected status: %d (expected 200 or 404)", path, status)
+	}
+}
+
+func verifyEndpointStatus(t *testing.T, api *rest.ExportableAPI) {
 	t.Helper()
 	status := api.Handler(nil).StatusCode()
+	if isNewEndpoint(api.Path) {
+		verifyNewEndpointStatus(t, api.Path, status)
+		return
+	}
 	if status != http.StatusOK {
 		t.Fatalf("endpoint %s returned unexpected status: %d", api.Path, status)
 	}
@@ -52,7 +69,7 @@ func verifyEndpointOK(t *testing.T, api *rest.ExportableAPI) {
 func verifyRegisteredEndpoints(t *testing.T, apis []*rest.ExportableAPI) {
 	t.Helper()
 	for _, api := range apis {
-		verifyEndpointOK(t, api)
+		verifyEndpointStatus(t, api)
 	}
 }
 
