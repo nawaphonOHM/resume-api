@@ -62,4 +62,4 @@ jobs:
       - name: Submit Cloud Build
         run: |
           gcloud builds submit . --gcs-source-staging-dir gs://${{ secrets.STAGING_BUCKET_NAME }}/source \
-          --region ${{ vars.LOCATION }}
+          --region ${{ vars.LOCATION }} --service-account projects/${{ secrets.GCP_PROJECT_ID }}/serviceAccounts/${{ secrets.IMPERSONATED_SERVICE_ACCOUNT }}
