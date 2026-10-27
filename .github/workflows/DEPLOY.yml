@@ -32,35 +32,27 @@ jobs:
         run: |
           echo "SHORT_SHA=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
 
-      - name: Replace Parameter in cloudbuild.yaml
-        env:
-          IMAGE_NAME: ${{ vars.IMAGE_NAME }}
-          SHORT_SHA: ${{ env.SHORT_SHA }}
-          BUILDER: ${{ vars.BUILDER }}
-          SERVICE_NAME: ${{ vars.SERVICE_NAME }}
-          LOCATION: ${{ vars.LOCATION }}
-          REPO_NAME: ${{ vars.REPO_NAME }}
-          SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}
+      - name: Submit Cloud Build
+        run: |
           # Define color codes
           RED: '\033[0;31m'
           GREEN: '\033[0;32m'
           YELLOW: '\033[0;33m'
           NC: '\033[0m' # No Color / Reset
-
-        run: |
           
-          CLOUD_BUILD_PARAMS=(_IMAGE_NAME_ _SHORT_SHA_ _BUILDER_ _SERVICE_NAME_ _LOCATION_ _REPO_NAME_ _SERVICE_ACCOUNT_)
+          echo "${YELLOW}Building Replacer...${NC}"
           
-          for PARAM in "${CLOUD_BUILD_PARAMS[@]}"
-          do
-            ENV_KEY_NAME=$(echo "$PARAM" | sed -E 's/^.|.$//g')
-            echo -e "$YELLOW"Replacing \'"$PARAM"\' in cloudbuild.yaml with "$ENV_KEY_NAME" env value"$NC"
-            sed -i "s|$PARAM|${!ENV_KEY_NAME}|g" cloudbuild.yaml
-            echo -e "$GREEN"Replacing \'"$PARAM"\' in cloudbuild.yaml with "$ENV_KEY_NAME" env value"$NC"
-          done
-
-      - name: Submit Cloud Build
-        run: |
+          SUBSTITUTIONS="_LOCATION=${{ vars.LOCATION }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_REPO_NAME=${{ vars.REPO_NAME }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_IMAGE_NAME=${{ vars.IMAGE_NAME }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_SHORT_SHA=${{ env.SHORT_SHA }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_BUILDER=${{ vars.BUILDER }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_SERVICE_NAME=${{ vars.SERVICE_NAME }}"
+          SUBSTITUTIONS="${SUBSTITUTIONS},_SERVICE_ACCOUNT=${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}"
+          
+          echo "${GREEN}Building Replacer...Done!${NC}"
+          
           gcloud builds submit . --gcs-source-staging-dir gs://${{ secrets.STAGING_BUCKET_NAME }}/source \
           --region ${{ vars.LOCATION }} \
-          --service-account projects/${{ secrets.GCP_PROJECT_ID }}/serviceAccounts/${{ secrets.CLOUD_BUILD_SERVICE_ACCOUNT }}
+          --service-account projects/${{ secrets.GCP_PROJECT_ID }}/serviceAccounts/${{ secrets.CLOUD_BUILD_SERVICE_ACCOUNT }} \
+          --substitutions="${SUBSTITUTIONS}"
