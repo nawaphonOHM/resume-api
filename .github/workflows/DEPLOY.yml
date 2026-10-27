@@ -34,14 +34,6 @@ jobs:
 
       - name: Submit Cloud Build
         run: |
-          # Define color codes
-          RED: '\033[0;31m'
-          GREEN: '\033[0;32m'
-          YELLOW: '\033[0;33m'
-          NC: '\033[0m' # No Color / Reset
-          
-          echo "${YELLOW}Building Replacer...${NC}"
-          
           SUBSTITUTIONS="_LOCATION=${{ vars.LOCATION }}"
           SUBSTITUTIONS="${SUBSTITUTIONS},_REPO_NAME=${{ vars.REPO_NAME }}"
           SUBSTITUTIONS="${SUBSTITUTIONS},_IMAGE_NAME=${{ vars.IMAGE_NAME }}"
@@ -49,9 +41,6 @@ jobs:
           SUBSTITUTIONS="${SUBSTITUTIONS},_BUILDER=${{ vars.BUILDER }}"
           SUBSTITUTIONS="${SUBSTITUTIONS},_SERVICE_NAME=${{ vars.SERVICE_NAME }}"
           SUBSTITUTIONS="${SUBSTITUTIONS},_SERVICE_ACCOUNT=${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}"
-          
-          echo "${GREEN}Building Replacer...Done!${NC}"
-          
           gcloud builds submit . --gcs-source-staging-dir gs://${{ secrets.STAGING_BUCKET_NAME }}/source \
           --region ${{ vars.LOCATION }} \
           --service-account projects/${{ secrets.GCP_PROJECT_ID }}/serviceAccounts/${{ secrets.CLOUD_BUILD_SERVICE_ACCOUNT }} \
