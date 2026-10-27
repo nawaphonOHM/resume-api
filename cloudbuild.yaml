@@ -39,9 +39,6 @@ steps:
       - '--set-secrets=OHM9996_MONGODB_ENABLE_PING=OHM9996_MONGODB_ENABLE_PING:1'
       - '--set-secrets=OHM9996_LOGGING_FORMAT=OHM9996_LOGGING_FORMAT:1'
 
-# Specify your custom service account
-serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/$_SERVICE_ACCOUNT'
-
 substitutions:
   _LOCATION: _LOCATION_
   _REPO_NAME: _REPO_NAME_
