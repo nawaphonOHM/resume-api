@@ -58,10 +58,8 @@ jobs:
             sed -i "s|$PARAM|${!ENV_KEY_NAME}|g" cloudbuild.yaml
             echo -e "$GREEN"Replacing \'"$PARAM"\' in cloudbuild.yaml with "$ENV_KEY_NAME" env value"$NC"
           done
-          
+
       - name: Submit Cloud Build
-        env:
-          REGION: ${{ vars.LOCATION }}
-          BUCKET_NAME: ${{ secrets.STAGING_BUCKET_NAME }}
         run: |
-          gcloud builds submit . --gcs-source-staging-dir gs://$BUCKET_NAME/source --region $REGION
+          gcloud builds submit . --gcs-source-staging-dir gs://${{ secrets.STAGING_BUCKET_NAME }}/source \
+          --region ${{ vars.LOCATION }}
