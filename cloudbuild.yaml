@@ -19,7 +19,6 @@ steps:
       - '--image=$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_SHORT_SHA'
       - '--region=$_LOCATION'
       - '--platform=managed'
-      - '--allow-unauthenticated'
       - '--service-account=$_SERVICE_ACCOUNT'
       - '--ingress=internal-and-cloud-load-balancing'
       - '--network=default'
@@ -39,9 +38,6 @@ steps:
       - '--set-secrets=OHM9996_SERVER_PORT=OHM9996_SERVER_PORT:1'
       - '--set-secrets=OHM9996_MONGODB_ENABLE_PING=OHM9996_MONGODB_ENABLE_PING:1'
       - '--set-secrets=OHM9996_LOGGING_FORMAT=OHM9996_LOGGING_FORMAT:1'
-
-# Specify your custom service account
-serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/$_SERVICE_ACCOUNT'
 
 substitutions:
   _LOCATION: _LOCATION_
