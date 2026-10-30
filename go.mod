@@ -2,7 +2,7 @@ module github.com/nawaphonOHM/resume-api
 
 go 1.27.2
 
-require github.com/nawaphonOHM/whatever/v3 v3.7.0
+require github.com/nawaphonOHM/whatever/v3 v3.9.0
 
 require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
@@ -47,6 +47,7 @@ require (
 	go.opentelemetry.io/otel v1.47.0 // indirect
 	go.opentelemetry.io/otel/log v1.47.0 // indirect
 	go.opentelemetry.io/otel/metric v1.47.0 // indirect
+	go.opentelemetry.io/otel/sdk v1.47.0 // indirect
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
 	golang.org/x/arch v0.22.0 // indirect
 	golang.org/x/crypto v0.57.0 // indirect
